@@ -1,0 +1,31 @@
+app:
+  name: Spring Jwt-Boilerplate
+
+spring:
+  datasource:
+    url: jdbc:hsqldb:file:E:\notes_app\app
+    username: root
+    password: 
+    tomcat:
+      max-wait: 1000
+      initial-size: 10
+      min-idle: 10
+      max-idle: 10
+      max-active: 32
+      validation-query: /* Service Name Health Check */ SELECT 1
+      test-on-borrow: true
+      test-on-connect: true
+      test-while-idle: true
+      log-abandoned: true
+      log-validation-errors: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.HSQLDialect
+    hibernate:
+      ddl-auto: update
+      
+jwt:
+  header: Authorization
+  expires_in: 600 # 5 minutes
+  secret: s.github.io
