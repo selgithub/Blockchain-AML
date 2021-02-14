@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     public static String token;
     private TokenManager tokenmanager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,19 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     UserTokenState token1 = response.body();
                     tokenmanager.createSession(username.getText().toString().trim(), token1.getAccess_token().toString());
                     Call<List<Register>> users = client.api().getUsers(token1.getAccess_token().toString());
-                    users.enqueue(new Callback<List<Register>>() {
-                        @Override
-                        public void onResponse(Call<List<Register>> call, Response<List<Register>> response) {
-                            System.out.println(response.body().toString());
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<Register>> call, Throwable t) {
-
-                        }
-                    });
-
-                    System.out.println(token);
+                     System.out.println(token);
 //                    Toast.makeText(MainActivity.this, "request sucessful", Toast.LENGTH_LONG).show();
                     startActivity(home);
                 } else

@@ -13,6 +13,9 @@ public interface Api {
     @POST("users/save")
     Call<Register> userregister(@Body Register register);
 
+    @POST("accounts/create")
+    Call<AccountRegister> accountregister(@Header("Authorization") String authorization,@Body CreateAccount acc);
+
     @POST("auth/login")
     Call<UserTokenState> createPost(@Body UsernamePassReq usernamePassReq);
 
