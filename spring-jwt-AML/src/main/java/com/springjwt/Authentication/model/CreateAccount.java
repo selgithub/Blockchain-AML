@@ -1,18 +1,18 @@
-package com.example.myapplication;
+package com.springjwt.Authentication.model;
 
 public class CreateAccount {
+    String Username;
     String accountname;
-    String username;
 
     public CreateAccount() {
     }
 
     public String getUsername() {
-        return username;
+        return Username;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        Username = username;
     }
 
     public String getAccountname() {

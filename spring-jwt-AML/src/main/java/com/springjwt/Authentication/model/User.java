@@ -22,13 +22,15 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Basic(optional = false)
     @Column(name = "username")
     private String username;
 
-
+    @Basic(optional = false)
     @Column(name = "password")
     private String password;
 
+    @Basic(optional = false)
     @JsonProperty(value = "first_name")
     @Column(name = "first_name")
     private String firstName;
@@ -37,21 +39,25 @@ public class User implements UserDetails {
     @Column(name = "last_name")
     private String lastName;
 
+    @Basic(optional = false)
     @Column(name = "email")
     private String email;
 
+    @Basic(optional = false)
     @JsonProperty(value = "phone_number")
     @Column(name = "phone_number")
     private String phoneNumber;
 
-
+    @Basic(optional = false)
     @Column(name = "enabled")
     private boolean enabled;
 
+    @Basic(optional = false)
     @JsonProperty(value = "created_by")
     @Column(name = "created_by")
     private String createdBy;
 
+    @Basic(optional = false)
     @JsonProperty(value = "updated_by")
     @Column(name = "updated_by")
     private String updatedBy;

@@ -13,7 +13,7 @@ public interface Api {
     @POST("users/save")
     Call<Register> userregister(@Body Register register);
 
-    @POST("accounts/create")
+    @POST("accounts/save")
     Call<AccountRegister> accountregister(@Header("Authorization") String authorization,@Body CreateAccount acc);
 
     @POST("auth/login")

@@ -1,7 +1,10 @@
-//package com.springjwt.boilerplate.repository;
-//
-//import com.springjwt.boilerplate.model.Account;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//
-//public interface AccountRepository extends JpaRepository <Long, Account>{
-//}
+package com.springjwt.Authentication.repository;
+
+import com.springjwt.Authentication.model.Account;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AccountRepository extends JpaRepository <Account,Long>{
+
+}

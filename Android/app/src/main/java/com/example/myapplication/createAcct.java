@@ -20,36 +20,40 @@ public class createAcct extends AppCompatActivity {
     Button createacc;
     EditText acct;
     SharedPreferences sharedPreferences;
-    String usertoken;
+    String usertoken, username;
     Intent home;
     Api api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        home=new Intent(this,HomeActivity.class);
+        home = new Intent(this, HomeActivity.class);
         sharedPreferences = getApplicationContext().getSharedPreferences("Bearer", Context.MODE_PRIVATE);
         usertoken = sharedPreferences.getString("jwttoken", "");
+        username = sharedPreferences.getString("username", "");
+
         setContentView(R.layout.activity_create_acct);
         createacc = (Button) findViewById(R.id.createacc);
         acct = (EditText) findViewById(R.id.acctname);
         createacc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 createaccount(createrequest());
+                String acc=acct.getText().toString().trim();
+                createaccount(createrequest());
             }
         });
     }
 
     private CreateAccount createrequest() {
-        CreateAccount account=new CreateAccount();
+        CreateAccount account = new CreateAccount();
+        account.setUsername(username);
         account.setAccountname(acct.getText().toString().trim());
         return account;
     }
 
-    private void createaccount(CreateAccount accountname) {
+    private void createaccount(CreateAccount account) {
 
-        Call<AccountRegister> res = client.api().accountregister(usertoken,accountname);
+        Call<AccountRegister> res = client.api().accountregister(usertoken, account);
         res.enqueue(new Callback<AccountRegister>() {
             @Override
             public void onResponse(Call<AccountRegister> call, Response<AccountRegister> response) {
