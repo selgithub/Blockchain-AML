@@ -13,10 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".createAcct"></activity>
-        <activity android:name=".RegisterActivity2" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ViewAccount"></activity>
+        <activity
+            android:name=".createAcct"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".RegisterActivity2"
+            android:parentActivityName=".RegisterActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

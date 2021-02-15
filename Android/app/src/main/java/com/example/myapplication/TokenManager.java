@@ -31,5 +31,8 @@ public class TokenManager {
         editor.commit();
     }
 
-
+    public void endSession() {
+        editor.clear();
+        editor.commit();
+    }
 }

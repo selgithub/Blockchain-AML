@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,10 +29,13 @@ public class RegisterActivity2 extends AppCompatActivity {
     Intent intent1, intent;
     public static int year, month, day;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register2);
+        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         intent = new Intent(this, MainActivity.class);
 
         sign = (Button) findViewById(R.id.button);

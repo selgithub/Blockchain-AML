@@ -1,12 +1,17 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
 
@@ -17,25 +22,41 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
-    CardView createaccounts, viewaccounts, buytokens, selltokens, viewtxns;
-     SharedPreferences sharedPreferences;
-     String usertoken;
-     Intent crtacct;
+    CardView createaccounts, viewaccts, buytokens, selltokens, viewtxns;
+    SharedPreferences sharedPreferences;
+    String usertoken;
+    Intent crtacct, login, viewacct;
+    private TokenManager tokenmanager;
+
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        crtacct=new Intent(this,createAcct.class);
-        sharedPreferences=getApplicationContext().getSharedPreferences("Bearer", Context.MODE_PRIVATE);
-        usertoken=sharedPreferences.getString("jwttoken","");
+        tokenmanager = new TokenManager(getApplicationContext());
+        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+
+
+        crtacct = new Intent(this, createAcct.class);
+        login = new Intent(this, MainActivity.class);
+        viewacct = new Intent(this, ViewAccount.class);
+
+
+        sharedPreferences = getApplicationContext().getSharedPreferences("Bearer", Context.MODE_PRIVATE);
+        usertoken = sharedPreferences.getString("jwttoken", "");
         //
         createaccounts = (CardView) findViewById(R.id.createaccounts);
-        viewaccounts = (CardView) findViewById(R.id.viewaccounts);
+        viewaccts = (CardView) findViewById(R.id.viewaccounts);
         buytokens = (CardView) findViewById(R.id.buytokens);
         selltokens = (CardView) findViewById(R.id.selltokens);
         viewtxns = (CardView) findViewById(R.id.viewtransactions);
         //
         createaccounts.setOnClickListener(this);
+        viewaccts.setOnClickListener(this);
+        buytokens.setOnClickListener(this);
+        selltokens.setOnClickListener(this);
+        viewtxns.setOnClickListener(this);
     }
 
     @Override
@@ -45,7 +66,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 createAccounts();
                 startActivity(crtacct);
                 break;
+            case R.id.viewaccounts:
+                //createAccounts();
+                startActivity(viewacct);
+                break;
+            case R.id.buytokens:
+                break;
+            case R.id.selltokens:
+                break;
+            case R.id.viewtransactions:
+                break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflator = getMenuInflater();
+        inflator.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        startActivity(login);
+
+        return true;
     }
 
     private void createAccounts() {
@@ -53,10 +98,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         users.enqueue(new Callback<List<Register>>() {
             @Override
             public void onResponse(Call<List<Register>> call, Response<List<Register>> response) {
-                List<Register> user= response.body();
+                List<Register> user = response.body();
                 System.out.println(response.body().toString());
-                System.out.println(user.get(0).first_name);
-             }
+            }
 
             @Override
             public void onFailure(Call<List<Register>> call, Throwable t) {

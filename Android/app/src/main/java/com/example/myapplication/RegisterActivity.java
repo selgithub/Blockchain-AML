@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,10 +21,13 @@ public class RegisterActivity extends AppCompatActivity {
     String fname, lname, email, pass, user, phone;
     public static Intent intent;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         etName = (EditText) findViewById(R.id.fname);
         etLastname = (EditText) findViewById(R.id.lname);
         etEmail = (EditText) findViewById(R.id.email);

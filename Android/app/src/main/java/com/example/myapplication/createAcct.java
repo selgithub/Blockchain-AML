@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.accounts.Account;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,9 +25,12 @@ public class createAcct extends AppCompatActivity {
     Intent home;
     Api api;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Create Account");
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         home = new Intent(this, HomeActivity.class);
         sharedPreferences = getApplicationContext().getSharedPreferences("Bearer", Context.MODE_PRIVATE);
         usertoken = sharedPreferences.getString("jwttoken", "");
@@ -38,7 +42,7 @@ public class createAcct extends AppCompatActivity {
         createacc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String acc=acct.getText().toString().trim();
+                String acc = acct.getText().toString().trim();
                 createaccount(createrequest());
             }
         });

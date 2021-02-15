@@ -6,16 +6,12 @@ import com.springjwt.Authentication.repository.UserRepository;
 import com.springjwt.Authentication.service.AccountService;
 import com.springjwt.Authentication.api.CreateAccounts;
 import com.springjwt.Authentication.model.Account;
-import com.springjwt.Authentication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.stellar.sdk.KeyPair;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Scanner;
+import java.util.Optional;
 
 @Controller
 public class AccountCreation implements CreateAccounts {
@@ -55,5 +51,10 @@ public class AccountCreation implements CreateAccounts {
         createacc.setUser(user1);
 
         return acctservice.addAccount(createacc);
+    }
+
+    @Override
+    public ResponseEntity<?> loadAll() {
+         return ResponseEntity.accepted().body(this.acctservice.findAll());
     }
 }

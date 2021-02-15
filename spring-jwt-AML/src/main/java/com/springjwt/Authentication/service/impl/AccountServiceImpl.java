@@ -6,6 +6,9 @@ import com.springjwt.Authentication.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class AccountServiceImpl implements AccountService {
     @Autowired
@@ -14,5 +17,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account addAccount(Account account) {
         return accrepo.save(account);
+    }
+
+    @Override
+    public List<Account> findAll() {
+        return accrepo.findAll();
     }
 }
